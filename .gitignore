@@ -1,31 +1,25 @@
-venv
-.env
-vector_store/faiss_index.bin
-vector_store/meta.pkl
+
+venv/
+# pycache files
+
 __pycache__/
-*.pyc
-.ipynb_checkpoints
-.DS_Store
-.idea/
-.vscode/
-.mypy_cache/
-.coverage
-htmlcov/
-dist/
-build/
-*.egg-info/
-pytest_cache/
-logs/
-*.log
-instance/
-celerybeat-schedule
-*.sqlite3
+
+
+# cache dir
+cache_dir/
+
+# .txt file
+*.txt
+
+# .env files
+.env
+.env.*
+
+# db files
 *.db
-*.sqlite
-*.bak
-*.swp
-*.tmp
-*.old
-*.orig
-*.rej
-*.env
+
+# .DS_Store files
+.DS_Store
+
+# vector store files
+vector_store/   
