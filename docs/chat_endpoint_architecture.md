@@ -6,36 +6,36 @@
 
 ```mermaid
 flowchart TD
-  Client[Client / Postman] -->|POST /api/login/webcam (image)| AuthAPI[Auth API]
-  AuthAPI --> Face[Face detection (OpenCV)]
-  Face -->|token| Client
+  Client["Client (Postman)"] -->|"POST /api/login/webcam (image)"| AuthAPI["Auth API"]
+  AuthAPI --> Face["Face detection (OpenCV)"]
+  Face -->|"token"| Client
 
-  Client -->|POST /api/chat\nHeader: token\nBody: {query}| ChatAPI[/Chat API: /api/chat/]
+  Client -->|"POST /api/chat\nHeader: token\nBody: {query}"| ChatAPI["Chat API: /api/chat"]
 
-  ChatAPI -->|Depends(require_auth)| AuthGate[Auth gate\n(in-memory token set)]
+  ChatAPI -->|"Depends(require_auth)"| AuthGate["Auth gate<br/>(in-memory token set)"]
 
-  ChatAPI -->|probe embedding dim| Embed[get_embedding("dimension_probe")\nSentenceTransformers (local)\nor remote embeddings]
-  ChatAPI -->|ensure_dim(d)| VS[FAISS Vector Store\n(load + dim sync)]
+  ChatAPI -->|"probe embedding dim"| Embed["get_embedding('dimension_probe')<br/>SentenceTransformers (local)<br/>or remote embeddings"]
+  ChatAPI -->|"ensure_dim(d)"| VS["FAISS Vector Store<br/>(load + dim sync)"]
 
   ChatAPI --> Parallel{{Run in parallel}}
 
-  Parallel --> Creative[CreativeGameDesignAgent]
-  Creative -->|get_embedding(query)| Embed
-  Creative -->|vector search| VS
-  Creative -->|LLM call (optional)| LLM[(OpenAI-compatible LLM)]
-  Creative -->|fallback if LLM fails| Creative
+  Parallel --> Creative["CreativeGameDesignAgent"]
+  Creative -->|"get_embedding(query)"| Embed
+  Creative -->|"vector search"| VS
+  Creative -->|"LLM call (optional)"| LLM[("OpenAI-compatible LLM")]
+  Creative -->|"fallback if LLM fails"| Creative
 
-  Parallel --> Systems[SystemsAgent]
-  Systems -->|SQL queries by keyword| DB[(Postgres/Supabase)]
-  Systems -->|LLM call (optional)| LLM
-  Systems -->|fallback if LLM fails| Systems
+  Parallel --> Systems["SystemsAgent"]
+  Systems -->|"SQL queries by keyword"| DB[("Postgres/Supabase")]
+  Systems -->|"LLM call (optional)"| LLM
+  Systems -->|"fallback if LLM fails"| Systems
 
-  Creative --> Eval[EvaluatorAgent]
+  Creative --> Eval["EvaluatorAgent"]
   Systems --> Eval
-  Eval -->|LLM merge (optional)| LLM
-  Eval -->|fallback merge if LLM fails| Eval
+  Eval -->|"LLM merge (optional)"| LLM
+  Eval -->|"fallback merge if LLM fails"| Eval
 
-  Eval -->|JSON: answer, creative, systems| Client
+  Eval -->|"JSON: answer, creative, systems"| Client
 ```
 
 ## Runtime sequence (what happens per request)
