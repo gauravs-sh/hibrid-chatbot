@@ -1,0 +1,38 @@
+# Core dependencies
+fastapi
+uvicorn[standard]
+asyncpg
+sqlalchemy
+psycopg2-binary
+python-dotenv
+opencv-python
+pydantic
+python-multipart
+httpx
+
+
+# RAG and LLM
+openai
+faiss-cpu
+chromadb
+langchain
+sentence-transformers
+
+# PDF processing
+PyPDF2
+tqdm
+
+# Caching
+aiocache
+
+# Logging
+loguru
+
+# For async
+anyio
+
+# Optional: for local development
+ipython
+
+psycopg2-binary
+asyncpg
