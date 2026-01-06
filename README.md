@@ -45,9 +45,32 @@ python -m app.rag.ingest
 uvicorn app.main:app --reload
 ```
 
-### 5. API Usage
-- POST `/api/login/webcam` — Upload webcam image for authentication
-- POST `/api/chat` — Ask interview questions (requires prior auth)
+
+### 5. Frontend Usage
+
+#### Static Frontend (HTML/CSS/JS)
+- Minimal, framework-free UI for login and chat
+- Files:
+  - `frontend/login.html` — Webcam login page
+  - `frontend/chat.html` — Chat interface
+  - `frontend/style.css` — Styles (centered, mobile-friendly, chat bubbles)
+  - `frontend/app.js` — Handles webcam, login, chat, API calls
+
+#### How to use
+1. Start the FastAPI backend (`uvicorn app.main:app --reload`)
+2. Open [http://localhost:8000/](http://localhost:8000/) for login
+3. After login, you’ll be redirected to `/chat-ui` for chat
+4. You can also access static files directly at `/frontend/*`
+
+#### Endpoints
+- `/` — Serves `login.html`
+- `/chat-ui` — Serves `chat.html`
+- `/frontend` — Serves all static frontend files
+
+#### Notes
+- Auth token is stored in browser localStorage after login
+- If token is missing, chat page redirects to login
+- All API calls use fetch and are CORS-enabled
 
 See docs/architecture.md for more details.
 
