@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Hybrid Chatbot</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Webcam Login</h2>
+    <button id="startWebcamBtn">Start Webcam</button>
+    <div id="videoContainer" style="display:none; margin-top:12px;">
+      <video id="webcamVideo" width="320" height="240" autoplay></video>
+      <br>
+      <button id="captureBtn">Capture & Login</button>
+    </div>
+    <div id="loginMessage" class="message"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
